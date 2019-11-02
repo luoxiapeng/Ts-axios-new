@@ -15,7 +15,8 @@ app.use(webpackDevMiddleware(compiler, {
     chunks: false
   }
 }))
-
+//获取express路由来发送路由请求
+// ----------请求开始-------------
 const router = express.Router()
 
 router.get('/simple/get', function(req, res) {
@@ -25,7 +26,7 @@ router.get('/simple/get', function(req, res) {
 })
 
 app.use(router)
-
+// ----------请求结束-------------
 app.use(webpackHotMiddleware(compiler))
 
 app.use(express.static(__dirname))
