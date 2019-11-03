@@ -54,13 +54,15 @@ export function buildURL(url:string,param?:any){
     })
 
   })
-
+  // a=1&b=2
   let serializedParams=parts.join('&')
   if(serializedParams){
     const markIndex=url.indexOf('#')
     if(markIndex!==-1){
       url=url.slice(0,markIndex)
     }
+    // url=/simple/get
+    // /simple/get?a=1&b=2
     url +=(url.indexOf('?')===-1?'?':'&')+serializedParams
   }
   return url
