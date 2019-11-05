@@ -8,8 +8,7 @@
  * 6./base/get?foo=bar
  * 7.
  */
-import {isDate,isObject} from './util'
-import { type } from 'os'
+import {isDate, isPlainObject} from './util'
 
 function encode(val:string):string{
   // 将url的参数进行特殊字符解析
@@ -46,7 +45,7 @@ export function buildURL(url:string,param?:any){
     values.forEach((val)=>{
       if(isDate(val)){
         val=val.toISOString()
-      }else if(isObject(val)){
+      }else if(isPlainObject(val)){
         // /base/get?foo=%7B%22bar%22:%22baz%22%7D
         val=JSON.stringify(val)
       }

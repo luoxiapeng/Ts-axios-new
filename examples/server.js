@@ -19,14 +19,31 @@ app.use(webpackDevMiddleware(compiler, {
 // ----------请求开始-------------
 const router = express.Router()
 
-router.get('/simple/get', function(req, res) {
-  res.json({
-    msg: `router-hello world`
-  })
-})
+// router.get('/simple/get', function(req, res) {
+//   res.json({
+//     msg: `router-hello world`
+//   })
+// })
 
-router.get('/base/get',(req,res)=>{
-  res.json('router',req.query)
+// router.get('/base/get',(req,res)=>{
+//   res.json('router',req.query)
+// })
+
+// ----------测试data返回参数-------
+router.post('/base/post',function(req,res){
+  res.json(req.body)
+})
+router.post('/base/buffer',function(req,res){
+  let msg=[]
+  req.on('data',(chunk)=>{
+    if(chunk){
+      msg.push(chunk)
+    }
+  })
+  req.on('end',()=>{
+    let buf=Buffer.concat(msg)
+    res.json(buf.toJSON())
+  })
 })
 
 app.use(router)
