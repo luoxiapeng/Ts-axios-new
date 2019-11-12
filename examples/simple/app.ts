@@ -67,18 +67,29 @@ import axios from '../../src/index'
 // })
 // ------------------测试data返回的数据（定义接口）------------
 axios({
-  method:'post',
-  url:'/base/post',
-  data:{
-    a:1,
-    b:2
+  method: 'post',
+  url: '/base/post',
+  data: {
+    a: 1,
+    b: 2
   }
 })
 
-const arr=new Int32Array([21,31])
+const arr = new Int32Array([21, 31])
 
 axios({
-  method:'post',
-  url:'/base/buffer',
-  data:arr
+  method: 'post',
+  url: '/base/buffer',
+  data: arr
 })
+
+axios({
+  method: 'get',
+  url: '/error/get1'
+})
+  .then(res => {
+    console.log(res)
+  })
+  .catch(e => {
+    console.log(e)
+  })
