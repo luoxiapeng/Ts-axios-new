@@ -3,7 +3,9 @@ export interface AxiosRequestConfig{
   method?:Method,
   data?:any,
   params?:any,
-  headers?:any
+  headers?:any,
+  timeout?: number,
+  responseType:XMLHttpRequestResponseType
 }
 
 export type Method='get'|'Get'
@@ -13,3 +15,12 @@ export type Method='get'|'Get'
 | 'post' | 'POST'
 | 'put' | 'PUT'
 | 'patch' | 'PATCH'
+
+export interface AxiosResponse<T=any>{
+  data:T
+  status:number,
+  statusText:string
+  herders:any
+  config:AxiosRequestConfig
+  require:any
+}
