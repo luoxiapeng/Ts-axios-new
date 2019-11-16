@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { AxiosError } from './../helpers/error'
 import { AxiosResponse } from './index'
 import { transFormRequest } from './../helpers/data'
@@ -46,3 +47,31 @@ export interface AxiosError extends Error {
   request?: any
   response?: AxiosResponse
 }
+=======
+export interface AxiosRequestConfig{
+  url:string,
+  method?:Method,
+  data?:any,
+  params?:any,
+  headers?:any,
+  timeout?: number,
+  responseType:XMLHttpRequestResponseType
+}
+
+export type Method='get'|'Get'
+| 'delete' | 'Delete'
+| 'head' | 'HEAD'
+| 'options' | 'OPTIONS'
+| 'post' | 'POST'
+| 'put' | 'PUT'
+| 'patch' | 'PATCH'
+
+export interface AxiosResponse<T=any>{
+  data:T
+  status:number,
+  statusText:string
+  herders:any
+  config:AxiosRequestConfig
+  require:any
+}
+>>>>>>> 31464eb2190256d8526623f7a95ddcab874eaa5c
