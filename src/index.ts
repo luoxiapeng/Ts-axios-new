@@ -1,12 +1,14 @@
-import { AxiosRequestConfig, Method } from './types/index'
+import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types/index'
 import xhr from './xhr'
 import { buildURL } from './helpers/url'
-import { transFormRequest } from './helpers/data'
+import { transformRequest, transformResponse } from './helpers/data'
 import { processHeaders } from './helpers/headers'
 
-function axios(config: AxiosRequestConfig): void {
+function axios(config: AxiosRequestConfig): AxiosPromise {
   processConfig(config)
-  xhr(config)
+  return xhr(config).then(res => {
+    return transformResponseData(res)
+  })
 }
 /*
  * 处理URL传递的格式
@@ -21,13 +23,17 @@ function processConfig(config: AxiosRequestConfig): void {
 }
 function transformUrl(config: AxiosRequestConfig): string {
   const { url, params } = config
-  return buildURL(url, params)
+  return buildURL(url!, params)
 }
 // ----------URL处理结束-------------
 
 // -----------处理返回数据函数---------
 function transFormRequestData(config: AxiosRequestConfig): any {
-  return transFormRequest(config.data)
+  return transformRequest(config.data)
+}
+function transformResponseData(res: AxiosResponse): AxiosResponse {
+  res.data = transformResponse(res.data)
+  return res
 }
 // ------------处理返回数据结束----------
 

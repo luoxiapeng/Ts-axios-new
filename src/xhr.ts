@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosPromise, AxiosResponse } from './types'
 import { parseHeaders } from './helpers/headers'
 import { createError } from './helpers/error'
 
-export default function xhr(config: AxiosRequestConfig) {
+export default function xhr(config: AxiosRequestConfig): AxiosPromise {
   return new Promise((resolve, reject) => {
     const {
       data = null,
@@ -14,7 +14,7 @@ export default function xhr(config: AxiosRequestConfig) {
       withCredentials
     } = config
     const request = new XMLHttpRequest()
-    request.open(method.toUpperCase(), url, true)
+    request.open(method.toUpperCase(), url!, true)
     configureRequest()
     addEvents()
     request.send(data)
@@ -81,4 +81,3 @@ export default function xhr(config: AxiosRequestConfig) {
     }
   })
 }
-
